@@ -91,7 +91,7 @@ CREATE TABLE IF NOT EXISTS `categoria_publicidad` (
 CREATE TABLE IF NOT EXISTS `imagenes_anuncios` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(128) COLLATE utf8_bin DEFAULT NULL,
-  `url` varchar(128) COLLATE utf8_bin DEFAULT NULL,
+  `url` TEXT CHARACTER SET ascii,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
 
@@ -104,7 +104,7 @@ CREATE TABLE IF NOT EXISTS `imagenes_anuncios` (
 CREATE TABLE IF NOT EXISTS `imagenes_noticias` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(128) COLLATE utf8_bin DEFAULT NULL,
-  `url` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `url` TEXT CHARACTER SET ascii,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
 
@@ -245,6 +245,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `username` varchar(128) COLLATE utf8_bin DEFAULT NULL,
   `password` varchar(128) COLLATE utf8_bin DEFAULT NULL,
   `fecha_ingreso` datetime DEFAULT NULL,
+  `image` TEXT CHARACTER SET ascii,
   `id_roles` int(10) DEFAULT NULL,
   `id_pais` int(10) DEFAULT NULL,
   PRIMARY KEY (`id`),

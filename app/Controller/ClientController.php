@@ -11,7 +11,7 @@ class ClientController extends AppController {
     public function request_index(){
      
         // remotely post the information to the server
-       $link =  "http://" . $_SERVER['HTTP_HOST'] . $this->webroot.'rest_users.json';
+       $link =  "http://" . $_SERVER['HTTP_HOST'] . $this->webroot.'users.json';
          
         $data = null;
         $httpSocket = new HttpSocket();
@@ -60,13 +60,19 @@ class ClientController extends AppController {
     public function request_add(){
      
         // remotely post the information to the server
-        $link =  "http://" . $_SERVER['HTTP_HOST'] . $this->webroot.'pais.json';
+        $link =  "http://" . $_SERVER['HTTP_HOST'] . $this->webroot.'noticias.json';
  
         $data = null;
         $httpSocket = new HttpSocket();       
-        $data['Pais']['id'] = '3';
-        $data['Pais']['codigo'] = '4343!';
-        $data['Pais']['nombre'] = 'hola!'; 
+        $data['Noticia']['titulo']='holaa';
+        $data['Noticia']['cuerpo']='blablabla';
+        $data['Noticia']['contacto']='32442545';
+        $data['Noticia']['estado']='1';
+        $data['Noticia']['fecha_publicacion']='11-11-14 12:00:00';
+        $data['Noticia']['id_users']='4';
+        $data['Noticia']['id_imagenes_noticias']='1';
+        $data['Noticia']['id_tags_noticias']='1';
+        $data['Noticia']['id_categoria_noticias']='1';
         $response = $httpSocket->post($link, $data );
         $this->set('response_code', $response->code);
         $this->set('response_body', $response->body);

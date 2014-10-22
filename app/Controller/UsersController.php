@@ -2,14 +2,15 @@
 
 App::uses('AppController', 'Controller');
 App::uses('AuthComponent', 'Controller/Component');
+App::uses('File', 'Utility');
+App::uses('Folder', 'Utility');
 
 
 class UsersController extends AppController {
     
-    public $uses = array('User');
+     public $uses = array('User');
     public $helpers = array('Html', 'Form');
     public $components = array('RequestHandler');
-
     
     public function beforeFilter() {
         parent::beforeFilter();
@@ -62,11 +63,10 @@ class UsersController extends AppController {
     }
  
     public function add() {
-        
         $this->User->create();
         if ($this->User->save($this->request->data)) {
             
-             $message = 'agregado';
+             $message = 'listoco';
         } else {
             $message = $this->User->validationErrors;
         }

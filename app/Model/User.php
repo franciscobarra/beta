@@ -19,7 +19,6 @@ class User extends AppModel {
             'foreignKey'   => 'id_pais'
         )
     );
-
     public function beforeValidate($options = array()) {
         parent::beforeValidate($options);
         $this->_prepareValidationRules();
@@ -29,7 +28,7 @@ class User extends AppModel {
         if (!empty($this->apiValidation)) { 
             $this->validate = array(
                 
-        /* Nombre De Usuario  */        
+        // Nombre De Usuario         
                 'username' => array(
                     'nonEmpty' => array(
                         'rule' => array('notEmpty'),
@@ -52,7 +51,7 @@ class User extends AppModel {
                         'message'  => 'Se deben ingresar solo letras  y numeros'
                    )),
         
-        /* Contraseña */
+        // Contraseña 
                     'password' => array(
                         'required' => array(
                             'rule' => array('notEmpty'),
@@ -63,7 +62,7 @@ class User extends AppModel {
                         'required' => true, 
                         'message' => 'La Contrasenia debe tener al minimo de 5 a 150 caracteres'
                     )),
-        /*Nombre*/
+        // Nombre
                 'nombre' => array(
                     'nonEmpty' => array(
                         'rule' => array('notEmpty'),
@@ -80,7 +79,7 @@ class User extends AppModel {
                         'rule'      => array('custom', '/^[a-z ]*$/i'),
                         'message'   => 'Solo se pueden ingresar letras',
                     )),
-        /*Apellido Paterno*/
+        // Apellido Paterno
                 'apellido_pat' => array(
                     'nonEmpty' => array(
                         'rule' => array('notEmpty'),
@@ -97,7 +96,7 @@ class User extends AppModel {
                         'rule'      => array('custom', '/^[a-z]*$/i'),
                         'message'   => 'Solo se pueden ingresar letras sin espacios',
                     )),
-        /*Apellido Materno*/
+        // Apellido Materno
                 'apellido_mat' => array(
                     'nonEmpty' => array(
                         'rule' => array('notEmpty'),
@@ -114,7 +113,7 @@ class User extends AppModel {
                         'rule'      => array('custom', '/^[a-z]*$/i'),
                         'message'   => 'Solo se pueden ingresar letras sin espacios',
                     )),
-        /*Fecha De Nacimiento*/
+        // Fecha De Nacimiento
                 'fecha_nacimiento' => array(
                     'nonEmpty' => array(
                         'rule' => array('notEmpty'),
@@ -126,7 +125,7 @@ class User extends AppModel {
                           'rule' => 'checkMayor_Edad',
                           'message' => 'Usted debe ser mayor de 18 anios'
                     )),
-        /*Rut*/        
+        //Rut
                 'rut' => array(
                         'nonEmpty' => array(
                             'rule' => array('notEmpty'),
