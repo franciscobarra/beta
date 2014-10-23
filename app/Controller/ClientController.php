@@ -68,6 +68,7 @@ class ClientController extends AppController {
         $data['Noticia']['cuerpo']='blablabla';
         $data['Noticia']['contacto']='32442545';
         $data['Noticia']['estado']='1';
+        $data['Noticia']['contador_visitas']='0';
         $data['Noticia']['fecha_publicacion']='11-11-14 12:00:00';
         $data['Noticia']['id_users']='1';
         $data['Noticia']['id_categoria_noticias']='1';

@@ -107,6 +107,7 @@ CREATE TABLE IF NOT EXISTS `noticias` (
   `cuerpo` text COLLATE utf8_bin,
   `fecha_publicacion` datetime DEFAULT NULL,
   `estado` int(2) NOT NULL,
+  `contador_visitas` int NOT NULL,
   `id_users` int(10) NOT NULL,
   `id_categoria_noticias` int(10) NOT NULL,
   PRIMARY KEY (`id`),

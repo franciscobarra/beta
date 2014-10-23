@@ -93,6 +93,18 @@ class Noticia extends AppModel {
                         'rule'      => 'numeric',
                         'message' => 'Solo se deben ingresar numeros',
                     )),
+        // contador_visitas
+                'contador_visitas' => array(
+                    'nonEmpty' => array(
+                        'rule' => array('notEmpty'),
+                        'required' => true,
+                        'message' => 'Se Requiere ingresar Numero de visitas',
+                        'allowEmpty' => false
+                    ),
+                    'numero'=>array(
+                        'rule'      => 'numeric',
+                        'message' => 'Solo se deben ingresar numeros',
+                    )),        
         // fecha_publicacion
                 'fecha_publicacion' => array(
                     'nonEmpty' => array(
