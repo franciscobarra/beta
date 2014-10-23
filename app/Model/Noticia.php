@@ -9,19 +9,22 @@ App::uses('AppModel', 'Model');
 class Noticia extends AppModel {
 
     var $name = 'Noticia';
+    var $hasMany = array(
+            'TagsNoticia' => array(
+                'className'    => 'TagsNoticia',
+                'foreignKey'   => 'id'
+            ),
+
+        );
     var $belongsTo = array(
         'CategoriaNoticia' => array(
             'className'    => 'CategoriaNoticia',
             'foreignKey'   => 'id_categoria_noticias'
         ),
-        'ImagenesNoticia' => array(
-            'className'    => 'ImagenesNoticia',
-            'foreignKey'   => 'id_imagenes_noticias'
+        'User' => array(
+            'className'    => 'User',
+            'foreignKey'   => 'id_users'
         ),
-        'TagsNoticia' => array(
-            'className'    => 'TagsNoticia',
-            'foreignKey'   => 'id_tags_noticias'
-        )
     );
 
     public function beforeValidate($options = array()) {

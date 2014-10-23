@@ -98,19 +98,6 @@ CREATE TABLE IF NOT EXISTS `imagenes_anuncios` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `imagenes_noticias`
---
-
-CREATE TABLE IF NOT EXISTS `imagenes_noticias` (
-  `id` int(10) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(128) COLLATE utf8_bin DEFAULT NULL,
-  `url` TEXT CHARACTER SET ascii,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `noticias`
 --
 
@@ -121,13 +108,9 @@ CREATE TABLE IF NOT EXISTS `noticias` (
   `fecha_publicacion` datetime DEFAULT NULL,
   `estado` int(2) NOT NULL,
   `id_users` int(10) NOT NULL,
-  `id_imagenes_noticias` int(10) NOT NULL,
-  `id_tags_noticias` int(10) NOT NULL,
   `id_categoria_noticias` int(10) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `id_users` (`id_users`),
-  KEY `id_imagenes_noticias` (`id_imagenes_noticias`),
-  KEY `id_tags_noticias` (`id_tags_noticias`),
   KEY `id_categoria_noticias` (`id_categoria_noticias`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
 
@@ -213,7 +196,9 @@ CREATE TABLE IF NOT EXISTS `sector_anuncios` (
 CREATE TABLE IF NOT EXISTS `tags_noticias` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(128) COLLATE utf8_bin DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `id_noticias` int(10) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_noticias` (`id_noticias`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -278,8 +263,6 @@ ALTER TABLE `anuncios`
 --
 ALTER TABLE `noticias`
   ADD CONSTRAINT `noticias_ibfk_1` FOREIGN KEY (`id_users`) REFERENCES `users` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `noticias_ibfk_2` FOREIGN KEY (`id_imagenes_noticias`) REFERENCES `imagenes_noticias` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `noticias_ibfk_3` FOREIGN KEY (`id_tags_noticias`) REFERENCES `tags_noticias` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `noticias_ibfk_4` FOREIGN KEY (`id_categoria_noticias`) REFERENCES `categoria_noticias` (`id`) ON DELETE CASCADE;
 
 --
@@ -296,6 +279,9 @@ ALTER TABLE `publicidad`
 ALTER TABLE `users`
   ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`id_roles`) REFERENCES `roles` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `users_ibfk_2` FOREIGN KEY (`id_pais`) REFERENCES `pais` (`id`) ON DELETE CASCADE;
+
+  ALTER TABLE `tags_noticias`
+  ADD CONSTRAINT `tags_noticias_ibfk_1` FOREIGN KEY (`id_noticias`) REFERENCES `noticias` (`id`) ON DELETE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

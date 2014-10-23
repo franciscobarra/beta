@@ -69,9 +69,7 @@ class ClientController extends AppController {
         $data['Noticia']['contacto']='32442545';
         $data['Noticia']['estado']='1';
         $data['Noticia']['fecha_publicacion']='11-11-14 12:00:00';
-        $data['Noticia']['id_users']='4';
-        $data['Noticia']['id_imagenes_noticias']='1';
-        $data['Noticia']['id_tags_noticias']='1';
+        $data['Noticia']['id_users']='1';
         $data['Noticia']['id_categoria_noticias']='1';
         $response = $httpSocket->post($link, $data );
         $this->set('response_code', $response->code);

@@ -35,7 +35,6 @@
  * how to customize the loading of plugin routes.
  */
 	CakePlugin::routes();
-		Router::mapResources("imagenesnoticias");
 		Router::mapResources("tagsnoticias");
 	    Router::mapResources("categorianoticias");
  		Router::mapResources("noticias");

@@ -9,13 +9,12 @@ App::uses('AppModel', 'Model');
 class TagsNoticia extends AppModel {
 
     var $name = 'TagsNoticia';
-    var $hasMany = array(
-            'Noticia' => array(
-                'className'    => 'Noticia',
-                'foreignKey'   => 'id'
-            ),
-
-        );
+    var $belongsTo = array(
+        'Noticia' => array(
+            'className'    => 'Noticia',
+            'foreignKey'   => 'id_noticias'
+        )
+     );
     public function beforeValidate($options = array()) {
         parent::beforeValidate($options);
         $this->_prepareValidationRules();
