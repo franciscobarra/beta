@@ -16,6 +16,7 @@ Choose your action
 <p>
 Choose your action
 <ul>
+<li><?php echo $this->Html->link('Login', array('controller' => 'client', 'action' => 'request_login')); ?></li>
 <li><?php echo $this->Html->link('Add', array('controller' => 'client', 'action' => 'request_add')); ?></li>
 <li><?php echo $this->Html->link('Mostrar Usuarios', array('controller' => 'client', 'action' => 'request_index')); ?></li>
 <li><?php echo $this->Html->link('Añadir Usuarios', array('controller' => 'client', 'action' => 'request_addUsers')); ?></li>

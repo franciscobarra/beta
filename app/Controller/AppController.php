@@ -24,7 +24,6 @@ App::uses('Controller', 'Controller');
 class AppController extends Controller {
     
     public $apiValidation = false;
-    
     public $components = array(
 		'Session',
                 'Auth'=>array(
@@ -43,8 +42,7 @@ class AppController extends Controller {
             "username" => "username",
             "password" => "password"
         );
-        
-        $this->Auth->allow(); //autorizar
+
     }
 
    /* public function isAuthorized($usuario) {

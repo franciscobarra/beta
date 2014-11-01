@@ -9,6 +9,15 @@ class PaisController extends AppController {
     public function beforeFilter() {
         parent::beforeFilter();
         $this->Pais->apiValidation = true;
+        if($this->Auth->user()){
+              $Rol = $this->User->Roles->findById($this->Auth->id_roles);
+           if($Rol['Roles']['nombre'] == 'admin'){  //ADMIN
+              $this->Auth->allow();  
+            }
+           if($Rol['Roles']['nombre'] == 'editor'){  //EDITOR
+              $this->Auth->allow();  
+            }
+        }
     }
     
     public function index() {

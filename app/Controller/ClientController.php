@@ -3,7 +3,11 @@
 App::uses('HttpSocket', 'Network/Http');
 class ClientController extends AppController {
     public $components = array('Security', 'RequestHandler');
-     
+    
+      public function beforeFilter() {
+        parent::beforeFilter();
+        $this->Auth->allow();
+    }
     public function index(){
          
     }
@@ -60,18 +64,27 @@ class ClientController extends AppController {
     public function request_add(){
      
         // remotely post the information to the server
-        $link =  "http://" . $_SERVER['HTTP_HOST'] . $this->webroot.'noticias.json';
+        $link =  "http://" . $_SERVER['HTTP_HOST'] . $this->webroot.'users.json';
  
         $data = null;
         $httpSocket = new HttpSocket();       
-        $data['Noticia']['titulo']='holaa';
-        $data['Noticia']['cuerpo']='blablabla';
-        $data['Noticia']['contacto']='32442545';
-        $data['Noticia']['estado']='1';
-        $data['Noticia']['contador_visitas']='0';
-        $data['Noticia']['fecha_publicacion']='11-11-14 12:00:00';
-        $data['Noticia']['id_users']='1';
-        $data['Noticia']['id_categoria_noticias']='1';
+        $data['User']['nombre_pat']='holaa';
+        $response = $httpSocket->post($link, $data );
+        $this->set('response_code', $response->code);
+        $this->set('response_body', $response->body);
+         
+        $this -> render('/Client/request_response');
+    }
+
+    public function request_login(){
+     
+        // remotely post the information to the server
+        $link =  "http://" . $_SERVER['HTTP_HOST'] . $this->webroot.'users.json';
+ 
+        $data = null;
+        $httpSocket = new HttpSocket();       
+        $data['User']['username']='holaa';
+        $data['User']['password']='blablabla';
         $response = $httpSocket->post($link, $data );
         $this->set('response_code', $response->code);
         $this->set('response_body', $response->body);

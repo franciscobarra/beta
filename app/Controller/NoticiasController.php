@@ -14,6 +14,19 @@ class NoticiasController extends AppController {
     public function beforeFilter() {
         parent::beforeFilter();
         $this->Noticia->apiValidation = true;
+        if($this->Auth->user()){
+           $Rol = $this->User->Roles->findById($this->Auth->id_roles);
+           if($Rol['Roles']['nombre'] == 'admin'){  //ADMIN
+              $this->Auth->allow();  
+            }
+           if($Rol['Roles']['nombre'] == 'editor'){  //EDITOR
+              $this->Auth->allow();  
+            }
+           if($Rol['Roles']['nombre'] == 'periodista'){  //PERIODISTA
+              $this->Auth->allow();  
+            }
+        }
+           $this->Auth->allow('index','view'); // TODOS
     }   
     
     public function index() {
@@ -28,7 +41,7 @@ class NoticiasController extends AppController {
         
         $this->Noticia->create();
         if ($this->Noticia->save($this->request->data)) {
-            
+             
              $message = 'agregado';
         } else {
             $message = $this->Noticia->validationErrors;

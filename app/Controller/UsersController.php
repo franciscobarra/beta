@@ -8,15 +8,32 @@ App::uses('Folder', 'Utility');
 
 class UsersController extends AppController {
     
-     public $uses = array('User');
+    public $uses = array('User');
     public $helpers = array('Html', 'Form');
     public $components = array('RequestHandler');
     
     public function beforeFilter() {
         parent::beforeFilter();
         $this->User->apiValidation = true;
+        if($this->Auth->user()){
+            $Rol = $this->User->Roles->findById($this->Auth->id_roles);
+            if($Rol['Roles']['nombre'] == 'admin'){  //ADMIN
+              $this->Auth->allow();  
+            }
+           if($Rol['Roles']['nombre'] == 'editor'){  //EDITOR
+              $this->Auth->allow();  
+            }
+           if($Rol['Roles']['nombre'] == 'periodista'){  //PERIODISTA
+              $this->Auth->allow('view','edit');  
+            }
+           if($Rol['Roles']['nombre'] == 'usuario_registrado'){  //USUARIO REGISTRADO
+              $this->Auth->allow('view','edit');  
+            }
+        }
+           $this->Auth->allow('login','logout','add'); // TODOS
     }
     
+
     public function login() {
         if ($this->Auth->user()) {
             $this->set(array(
@@ -68,7 +85,7 @@ class UsersController extends AppController {
             
              $message = 'listoco';
         } else {
-            $message = $this->User->validationErrors;
+             $message = $this->User->validationErrors;
         }
         $this->set(array(
             'message' => $message,

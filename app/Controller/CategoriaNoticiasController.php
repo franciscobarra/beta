@@ -14,6 +14,19 @@ class CategoriaNoticiasController extends AppController {
     public function beforeFilter() {
         parent::beforeFilter();
         $this->CategoriaNoticia->apiValidation = true;
+        if($this->Auth->user()){
+           $Rol = $this->User->Roles->findById($this->Auth->id_roles);
+           if($Rol['Roles']['nombre'] == 'admin'){  //ADMIN
+              $this->Auth->allow();  
+            }
+           if($Rol['Roles']['nombre'] == 'editor'){  //EDITOR
+              $this->Auth->allow();  
+            }
+           if($Rol['Roles']['nombre'] == 'periodista'){  //PERIODISTA
+              $this->Auth->allow('add','index');  
+            }
+        }
+
     }   
     
     public function index() {
