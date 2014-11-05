@@ -55,8 +55,6 @@ class UsersController extends AppController {
                 ));
             }
         }
-        
-        $this->Session->setFlash(__('no se puede ingresar usuario'));
     }
     
     public function logout() {
