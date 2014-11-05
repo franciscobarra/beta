@@ -10,7 +10,7 @@ class RolesController extends AppController {
         parent::beforeFilter();
         $this->Roles->apiValidation = true;
         if($this->Auth->user()){
-              $Rol = $this->User->Roles->findById($this->Auth->id_roles);
+              $Rol = $this->User->Roles->findById($this->Auth->user('id_roles'));
            if($Rol['Roles']['nombre'] == 'admin'){  //ADMIN
               $this->Auth->allow();  
             }
@@ -31,7 +31,7 @@ class RolesController extends AppController {
     public function add() {
         $this->Roles->create();
         if ($this->Roles->save($this->request->data)) {
-             $message = 'Creado';
+             $message = '200';
         } else {
            $message = $this->Roles->validationErrors;
         }
@@ -53,9 +53,9 @@ class RolesController extends AppController {
     public function edit($id) {
         $this->Roles->id = $id;
         if ($this->Roles->save($this->request->data)) {
-            $message = 'Saved';
+            $message = '200';
         } else {
-            $message = 'Error';
+            $message = $this->Roles->validationErrors;
         }
         $this->set(array(
             'message' => $message,
@@ -65,9 +65,9 @@ class RolesController extends AppController {
      
     public function delete($id) {
         if ($this->Roles->delete($id)) {
-            $message = 'Deleted';
+            $message = '200';
         } else {
-            $message = 'Error';
+            $message = '500';
         }
         $this->set(array(
             'message' => $message,

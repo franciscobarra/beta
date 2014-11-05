@@ -15,7 +15,7 @@ class CategoriaNoticiasController extends AppController {
         parent::beforeFilter();
         $this->CategoriaNoticia->apiValidation = true;
         if($this->Auth->user()){
-           $Rol = $this->User->Roles->findById($this->Auth->id_roles);
+           $Rol = $this->User->Roles->findById($this->Auth->user('id_roles'));
            if($Rol['Roles']['nombre'] == 'admin'){  //ADMIN
               $this->Auth->allow();  
             }
@@ -42,7 +42,7 @@ class CategoriaNoticiasController extends AppController {
         $this->CategoriaNoticia->create();
         if ($this->CategoriaNoticia->save($this->request->data)) {
             
-             $message = 'agregado';
+             $message = '200';
         } else {
             $message = $this->CategoriaNoticia->validationErrors;
         }
@@ -66,9 +66,9 @@ class CategoriaNoticiasController extends AppController {
     public function edit($id = null) {
         $this->CategoriaNoticia->id = $id;
         if ($this->CategoriaNoticia->save($this->request->data)) {
-            $message = 'Saved';
+            $message = '200';
         } else {
-            $message = 'Error';
+            $message = $this->CategoriaNoticia->validationErrors;
         }
         $this->set(array(
             'message' => $message,
@@ -78,9 +78,9 @@ class CategoriaNoticiasController extends AppController {
      
     public function delete($id) {
         if ($this->CategoriaNoticia->delete($id)) {
-            $message = 'Deleted';
+            $message = '200';
         } else {
-            $message = 'Error';
+            $message = '500';
         }
         $this->set(array(
             'message' => $message,

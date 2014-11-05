@@ -15,7 +15,7 @@ class TagsNoticiasController extends AppController {
         parent::beforeFilter();
         $this->TagsNoticia->apiValidation = true;
         if($this->Auth->user()){
-            $Rol = $this->User->Roles->findById($this->Auth->id_roles);
+            $Rol = $this->User->Roles->findById($this->Auth->user('id_roles'));
            if($Rol['Roles']['nombre'] == 'admin'){  //ADMIN
               $this->Auth->allow();  
             }
@@ -41,7 +41,7 @@ class TagsNoticiasController extends AppController {
         $this->TagsNoticia->create();
         if ($this->TagsNoticia->save($this->request->data)) {
             
-             $message = 'agregado';
+             $message = '200';
         } else {
             $message = $this->TagsNoticia->validationErrors;
         }
@@ -65,9 +65,9 @@ class TagsNoticiasController extends AppController {
     public function edit($id = null) {
         $this->TagsNoticia->id = $id;
         if ($this->TagsNoticia->save($this->request->data)) {
-            $message = 'Saved';
+            $message = '200';
         } else {
-            $message = 'Error';
+            $message = $this->TagsNoticia->validationErrors;
         }
         $this->set(array(
             'message' => $message,
@@ -77,9 +77,9 @@ class TagsNoticiasController extends AppController {
      
     public function delete($id) {
         if ($this->TagsNoticia->delete($id)) {
-            $message = 'Deleted';
+            $message = '200';
         } else {
-            $message = 'Error';
+            $message = '500';
         }
         $this->set(array(
             'message' => $message,

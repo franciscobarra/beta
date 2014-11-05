@@ -10,7 +10,7 @@ class PaisController extends AppController {
         parent::beforeFilter();
         $this->Pais->apiValidation = true;
         if($this->Auth->user()){
-              $Rol = $this->User->Roles->findById($this->Auth->id_roles);
+              $Rol = $this->User->Roles->findById($this->Auth->user('id_roles'));
            if($Rol['Roles']['nombre'] == 'admin'){  //ADMIN
               $this->Auth->allow();  
             }
@@ -31,7 +31,7 @@ class PaisController extends AppController {
     public function add() {
         $this->Pais->create();
         if ($this->Pais->save($this->request->data)) {
-             $message = 'Created';
+             $message = '200';
         } else {
             $message = $this->Pais->validationErrors;
         }
@@ -53,9 +53,9 @@ class PaisController extends AppController {
     public function edit($id) {
         $this->Pais->id = $id;
         if ($this->Pais->save($this->request->data)) {
-            $message = 'Saved';
+            $message = '200';
         } else {
-            $message = 'Error';
+            $message = $this->Pais->validationErrors;
         }
         $this->set(array(
             'message' => $message,
@@ -65,9 +65,9 @@ class PaisController extends AppController {
      
     public function delete($id) {
         if ($this->Pais->delete($id)) {
-            $message = 'Deleted';
+            $message = '200';
         } else {
-            $message = 'Error';
+            $message = '500';
         }
         $this->set(array(
             'message' => $message,

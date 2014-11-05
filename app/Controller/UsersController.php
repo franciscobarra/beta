@@ -16,7 +16,7 @@ class UsersController extends AppController {
         parent::beforeFilter();
         $this->User->apiValidation = true;
         if($this->Auth->user()){
-            $Rol = $this->User->Roles->findById($this->Auth->id_roles);
+            $Rol = $this->User->Roles->findById($this->Auth->user('id_roles'));
             if($Rol['Roles']['nombre'] == 'admin'){  //ADMIN
               $this->Auth->allow();  
             }
@@ -34,23 +34,23 @@ class UsersController extends AppController {
     }
     
 
-    public function login() {
+    public function login() { // 200 = Success , 401 ,  500 = Error 
         if ($this->Auth->user()) {
             $this->set(array(
-                'message' => 'Ya estas logeado',
+                'message' => '401',
                 '_serialize' => array('message')
             ));
         }
         
-        if ($this->request->is('post') && !$this->Auth->user()) {
+        if (!$this->Auth->user()) {
             if ($this->Auth->login()) {
                 $this->set(array(
-                    'user' => $this->Auth->user(),
-                    '_serialize' => array('user')
+                    'message' => '200',
+                    '_serialize' => array('message')
                 ));
             }else{
                  $this->set(array(
-                    'message' => 'error',
+                    'message' => '500',
                     '_serialize' => array('message')
                 ));
             }
@@ -62,13 +62,9 @@ class UsersController extends AppController {
     public function logout() {
         if ($this->Auth->logout()) {
             $this->set(array(
-                'message' => array(
-                    'text' => __('Logout successfully'),
-                    'type' => 'info'
-                ),
+                'message' => '200',
                 '_serialize' => array('message')
             ));
-        }
     }
     
     public function index() {
@@ -83,7 +79,7 @@ class UsersController extends AppController {
         $this->User->create();
         if ($this->User->save($this->request->data)) {
             
-             $message = 'listoco';
+             $message = '200';
         } else {
              $message = $this->User->validationErrors;
         }
@@ -107,9 +103,9 @@ class UsersController extends AppController {
     public function edit($id = null) {
         $this->User->id = $id;
         if ($this->User->save($this->request->data)) {
-            $message = 'Saved';
+            $message = '200';
         } else {
-            $message = 'Error';
+            $message = $this->User->validationErrors;
         }
         $this->set(array(
             'message' => $message,
@@ -119,9 +115,9 @@ class UsersController extends AppController {
      
     public function delete($id) {
         if ($this->User->delete($id)) {
-            $message = 'Deleted';
+            $message = '200';
         } else {
-            $message = 'Error';
+            $message = '500';
         }
         $this->set(array(
             'message' => $message,
