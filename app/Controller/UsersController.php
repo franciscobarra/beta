@@ -2,9 +2,6 @@
 
 App::uses('AppController', 'Controller');
 App::uses('AuthComponent', 'Controller/Component');
-App::uses('File', 'Utility');
-App::uses('Folder', 'Utility');
-
 
 class UsersController extends AppController {
     
@@ -41,7 +38,6 @@ class UsersController extends AppController {
                 '_serialize' => array('message')
             ));
         }
-        
         if (!$this->Auth->user()) {
             if ($this->Auth->login()) {
                 $this->set(array(
