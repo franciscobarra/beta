@@ -65,6 +65,7 @@ class UsersController extends AppController {
                 'message' => '200',
                 '_serialize' => array('message')
             ));
+        }
     }
     
     public function index() {
