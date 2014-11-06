@@ -42,7 +42,8 @@ class UsersController extends AppController {
             if ($this->Auth->login()) {
                 $this->set(array(
                     'message' => '200',
-                    '_serialize' => array('message')
+                    'user' => $this->Auth->user(),
+                    '_serialize' => array('message', 'user')
                 ));
             }else{
                  $this->set(array(
